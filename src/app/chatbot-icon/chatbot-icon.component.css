@@ -1,0 +1,48 @@
+.image {
+    height: 100%;
+    width: 100%;
+    max-height: 120px;
+    max-width: 120px;
+    object-fit: contain;
+  }
+  
+  .chatbot-icon {
+    position: fixed;
+    bottom: 20px; /* Adjust as needed */
+    right: 20px;  /* Adjust as needed */
+    height: 80px;
+    width: 80px;
+    max-height: 120px;
+    max-width: 120px;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it is on top of other elements */
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 600px) {
+    .chatbot-icon {
+      bottom: 10px;
+      right: 10px;
+      height: 60px;
+      width: 60px;
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .chatbot-icon {
+      bottom: 15px;
+      right: 15px;
+      height: 70px;
+      width: 70px;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .chatbot-icon {
+      bottom: 20px;
+      right: 20px;
+      height: 80px;
+      width: 80px;
+    }
+  }
+  

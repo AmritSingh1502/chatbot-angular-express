@@ -1,0 +1,143 @@
+/* .chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #007bff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 999;
+}
+
+.chatbot-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+ */
+
+
+ .chatbot-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 600px;
+  height: 100vh;
+  max-height: 80vh;
+  margin: 20px auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+.chatbot-title {
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: center;
+  background-color: #2e4b6a;
+  color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.chat-container {
+  flex: 1;
+  padding: 20px;
+  margin: 10px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 20px;
+  max-width: 70%;
+  word-wrap: break-word;
+  word-break: break-word;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user {
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  color: #ffffff;
+  align-self: flex-end;
+  border: 1px solid #a3d5ff;
+}
+
+.user .message-content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.user .user-icon {
+  margin-right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.assistant-reply {
+  background-color: #f1f1f1;
+  color: #333;
+  align-self: flex-start;
+  border: 1px solid #e0e0e0;
+}
+
+.assistant-reply .message-content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.input-container {
+  display: flex;
+  padding: 15px;
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+.input-container button {
+  padding: 12px 20px;
+  margin-left: 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.input-container button:hover {
+  background-color: #0056b3;
+}
+
+.input-container button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
