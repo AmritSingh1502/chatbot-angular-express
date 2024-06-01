@@ -7,6 +7,9 @@ import { OpenAiApiService } from '../services/open-ai-api.service';
   styleUrls: ['./chatbot.component.css']
 })
 export class ChatbotComponent {
+
+
+  
   userMessage!: string;
   assistantReply!: string;
   chatMessages: { role: string, content: string }[] = [];
