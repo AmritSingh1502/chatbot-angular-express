@@ -1,31 +1,28 @@
-const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config();
+const { Configuration, OpenAIApi } = require('openai');
 
-const options = {
-  method: 'POST',
-  url: 'https://chat-gpt-4-turbo1.p.rapidapi.com/',
-  headers: {
-    'content-type': 'application/json',
-    'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
-    'X-RapidAPI-Host': 'chat-gpt-4-turbo1.p.rapidapi.com'
-  },
-  data: {
-    model: 'gpt-4-turbo-preview',
-    messages: [
-      {
-        role: 'user',
-        content: 'Hello'
-      }
-    ]
-  }
-};
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
 
-async function makeRequest() {
-  try {
-    const response = await axios.request(options);
-    console.log(response.data);
-  } catch (error) {
-    console.error(error);
-  }
+const openai = new OpenAIApi(configuration);
+
+const getResponse = async () => {
+    try {
+        const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [
+                { role: "user", content: "say this is a test" }
+            ],
+            max_tokens: 7,
+            temperature: 0,
+        });
+
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error creating completion:", error);
+    }
 }
 
-makeRequest();
+getResponse();
