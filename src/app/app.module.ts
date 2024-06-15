@@ -7,20 +7,17 @@ import { AppComponent } from './app.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { FormsModule } from '@angular/forms';
 import { ChatbotIconComponent } from './chatbot-icon/chatbot-icon.component';
+import { MessageComponent } from './message/message.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ChatbotComponent,
-    ChatbotIconComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

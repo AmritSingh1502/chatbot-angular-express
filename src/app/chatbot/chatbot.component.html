@@ -1,21 +1,10 @@
-
-<!-- <div class="chatbot-icon" (click)="toggleChatbot()">
-  <img src="../../assets/images/user.png" alt="Chatbot Icon">
-</div> -->
-
-
 <div class="chatbot-container">
   <div class="chatbot-title">Chatbot</div>
-  <div class="chat-container">
-    <div *ngFor="let message of chatMessages" class="message-wrapper">
-      <!-- <img *ngIf="message.role === 'user'" class="user-icon" src="../../assets/images/user.png" alt="User Icon"> -->
-      <div class="message" [ngClass]="message.role">
-        <div class="message-content">{{ message.content }}</div>
-      </div>
-    </div>
+  <div class="chat-container" #chatContainer>
+    <app-message *ngFor="let message of chatMessages" [role]="message.role" [content]="message.content"></app-message>
   </div>
   <div class="input-container">
     <input [(ngModel)]="userMessage" placeholder="Enter your message" />
-    <button (click)="sendMessage11()" >Send</button>
+    <button (click)="sendMessage()">Send</button>
   </div>
 </div>
