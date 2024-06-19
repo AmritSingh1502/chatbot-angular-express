@@ -23,6 +23,12 @@
   border-top-right-radius: 5px;
 }
 
+.close-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
 .chat-container {
   flex: 1;
   overflow-y: auto;

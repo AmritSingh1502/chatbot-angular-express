@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { OpenAiApiService } from '../services/open-ai-api.service';
 import { MessageComponent } from '../message/message.component';
+import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-chatbot',
@@ -15,11 +15,10 @@ export class ChatbotComponent implements AfterViewChecked {
   @ViewChild('chatContainer') private chatContainer!: ElementRef;
 
   userMessage!: string;
-  assistantReply!: string;
   chatMessages: { role: string, content: string }[] = [];
   isChatbotVisible: boolean = false;
 
-  constructor(private openAiApiService: OpenAiApiService) {}
+  constructor(private chatService:ChatService){}
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -38,7 +37,6 @@ export class ChatbotComponent implements AfterViewChecked {
       { keywords: ['how are you', 'doing', 'feel'], answer: 'I am fine, thank you!' },
       { keywords: ['name', 'your'], answer: 'My name is Chatbot.' },
       { keywords: ['options', 'show'], answer: 'Here are the options: ...' }
-
     ];
 
     const userQuestion = this.userMessage.trim().toLowerCase();
@@ -52,26 +50,39 @@ export class ChatbotComponent implements AfterViewChecked {
       }
     }
 
+    this.chatMessages.push({ role: 'user', content: this.userMessage });
+
     if (matchedAnswer) {
-      this.chatMessages.push({ role: 'user', content: this.userMessage });
       this.chatMessages.push({ role: 'assistant', content: matchedAnswer });
     } else {
-      // OpenAI API
-      this.chatMessages.push({ role: 'user', content: this.userMessage });
-      this.openAiApiService.sendMessage(this.userMessage).subscribe(
-        response => {
-          this.assistantReply = response.reply;
-          this.chatMessages.push({ role: 'assistant', content: this.assistantReply });
-        },
-        error => {
-          this.chatMessages.push({ role: 'assistant', content: "I'm sorry, I don't understand. Can you please ask another question?" });
-        }
-      );
+      this.chatMessages.push({ role: 'assistant', content: "I'm sorry, I don't understand. Can you please ask another question?" });
     }
 
     this.userMessage = '';
   }
 
+  sendMessage2(): void {
+    if (!this.userMessage.trim()) {
+      return; // Do not send empty messages
+    }
+
+    // Add user message to chatMessages
+    this.chatMessages.push({ role: 'user', content: this.userMessage });
+
+    // Send user message to backend via service method
+    this.chatService.sendMessageToBackend(this.userMessage).subscribe(
+      response => {
+        const assistantReply = response.answer || "I'm sorry, I don't understand. Can you please ask another question?";
+        this.chatMessages.push({ role: 'assistant', content: assistantReply });
+      },
+      error => {
+        console.error('Error sending message to backend:', error);
+        this.chatMessages.push({ role: 'assistant', content: "There was an error processing your request. Please try again later." });
+      }
+    );
+
+    this.userMessage = ''; // Clear user input after sending
+  }
 
   private matchKeywords(userQuestion: string, keywords: string[]): boolean {
     for (let i = 0; i < keywords.length; i++) {
