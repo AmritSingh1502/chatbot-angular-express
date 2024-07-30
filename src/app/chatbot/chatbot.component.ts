@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MessageComponent } from '../message/message.component';
 import { ChatService } from '../chat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chatbot',
@@ -18,7 +19,7 @@ export class ChatbotComponent implements AfterViewChecked {
   chatMessages: { role: string, content: string }[] = [];
   isChatbotVisible: boolean = false;
 
-  constructor(private chatService:ChatService){}
+  constructor(private chatService:ChatService, private router: Router){}
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -91,5 +92,9 @@ export class ChatbotComponent implements AfterViewChecked {
       }
     }
     return false;
+  }
+
+  closeChat() {
+    this.router.navigate(['/chatbot-image']); // Replace '/chatbot-image' with your actual route
   }
 }

@@ -1,5 +1,8 @@
 <div class="chatbot-container">
-  <div class="chatbot-title">Chatbot</div>
+  <div class="chatbot-title">
+    Chatbot
+    <button class="close-btn" (click)="closeChat()">X</button>
+  </div>
   <div class="chat-container" #chatContainer>
     <app-message *ngFor="let message of chatMessages" [role]="message.role" [content]="message.content"></app-message>
   </div>
